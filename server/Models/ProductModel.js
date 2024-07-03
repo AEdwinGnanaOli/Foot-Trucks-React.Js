@@ -1,0 +1,19 @@
+const mongoose=require('mongoose')
+const bcrypt=require('bcrypt')
+
+const  productSchema= new mongoose.Schema({
+    ProductId:String,
+    shopname:String,email:String,shopmobilenumber:Number,shopaddress:String,
+    starttime:{type:String},
+    endtime:String,work:String,price:Number,role:String,shopImage:String,menuImage:String,
+    likeCount:{
+        type:Number,
+        default:0 
+    },
+    role:String
+    
+})
+
+const ProductModel = mongoose.model("Products", productSchema)
+
+module.exports=ProductModel
