@@ -6,7 +6,7 @@ require('dotenv').config()
 const {MONGO_URL,PORT}=process.env
 const app = express()
 app.use(cors({
-    origin: ['http://localhost:5173'],
+    origin: ['https://phenomenal-frangipane-a72f12.netlify.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }))
