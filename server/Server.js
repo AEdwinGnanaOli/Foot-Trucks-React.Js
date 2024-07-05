@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const cookieParser=require('cookie-parser')
 require('dotenv').config()
+const {MONGO_URL,PORT}=process.env
 const app = express()
 app.use(cors({
     origin: ['http://localhost:5173'],
@@ -13,15 +14,16 @@ const authRouteUser=require('./Routes/AuthRoute')
 app.use(cookieParser());
 app.use(express.json())
 app.use(express.static('Assets'))
-const port = 3000;
+
 
 app.use('/',authRouteUser)
 
-mongoose.connect('mongodb://localhost:27017/FoodTrucks').then((result) => {
+
+mongoose.connect(MONGO_URL).then((result) => {
     console.log('connect to mongoDB')
 }).catch((err) => {
     console.log(err)
 });
-app.listen(port, () => {
-    console.log('server is ruinng')
+app.listen(PORT, () => {
+    console.log(`server is ruinng${PORT}`)
 })
