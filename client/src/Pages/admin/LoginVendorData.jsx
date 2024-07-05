@@ -8,14 +8,14 @@ import Dashboard from './Dashboard';
 function LoginVendorData() {
     const [data, setData] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:3000/loginvendordata').then(user => {
+        axios.get('https://foot-trucks-react-js.onrender.com/loginvendordata').then(user => {
             setData(user.data.vendorDatas)
         })
     }, [])
     console.log(data)
     const handleDelete = (id) => {
         console.log(id)
-        axios.delete(`http://localhost:3000/deletedetails/${id}`).then((user) => {
+        axios.delete(`https://foot-trucks-react-js.onrender.com/deletedetails/${id}`).then((user) => {
             window.location.reload()
         }).catch(err => { console.log(err) })
     }

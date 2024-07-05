@@ -44,7 +44,7 @@ function ProductSignIn() {
       formData.append("file1", userData.shop);
       formData.append("file2", userData.menu);
       axios
-        .post(`http://localhost:3000/productregister/${vendorId}`, formData)
+        .post(`https://foot-trucks-react-js.onrender.com/productregister/${vendorId}`, formData)
         .then((user) => {
           if (user.data === "User already exists") {
             throw new Error();

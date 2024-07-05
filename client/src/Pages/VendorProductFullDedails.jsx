@@ -13,19 +13,19 @@ function VendorProductFullDedails() {
   const vendorId = sessionStorage.getItem('vendorid')
   const [userData, setUserData] = useState({ shopname: "", email: '', shopmobilenumber: '', shopaddress: "", file: "" })
   useEffect(() => {
-    axios.get(`http://localhost:3000/productfulldetails/${id}/${token}`).then(product => {
+    axios.get(`https://foot-trucks-react-js.onrender.com/productfulldetails/${id}/${token}`).then(product => {
       setVendorProducts([product.data.vendorProductDetails])
     })
   }, [])
 
   const handleCard = () => {
-    axios.post(`http://localhost:3000/usercart/${userId}/${vendorId}/${id}`, userData).then((card) => {
+    axios.post(`https://foot-trucks-react-js.onrender.com/usercart/${userId}/${vendorId}/${id}`, userData).then((card) => {
       navigate(`/userhome`)
 
     }).catch(err => {
       console.log(err)
     })
-    axios.post(`http://localhost:3000/userdetails/${userId}/${vendorId}/${id}`).then((result) => {
+    axios.post(`https://foot-trucks-react-js.onrender.com/userdetails/${userId}/${vendorId}/${id}`).then((result) => {
     }).catch((err) => {
       console.log(err)
     });
@@ -43,7 +43,7 @@ function VendorProductFullDedails() {
               <div className="fulldetails">
                 <div className="shop-details">
                   <div className="shop-image">
-                    <Card.Img variant="top" className='' src={`http://localhost:3000/images/${vendor.shopImage}`}/>
+                    <Card.Img variant="top" className='' src={`https://foot-trucks-react-js.onrender.com/images/${vendor.shopImage}`}/>
                   </div>
                   <div className="card-body">
                     <Card.Body >
@@ -69,7 +69,7 @@ function VendorProductFullDedails() {
                 </div>
                 <div className="menu">
                   <div className="menu-image">
-                    <Card.Img variant="top" src={`http://localhost:3000/images/${vendor.menuImage}`}/>
+                    <Card.Img variant="top" src={`https://foot-trucks-react-js.onrender.com/images/${vendor.menuImage}`}/>
                   </div>
                 </div>
               </div>

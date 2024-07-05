@@ -44,7 +44,7 @@ const Dashboard = ({ colors, children, title, description, keyword, author }) =>
         navigate("/login");
       }
       const { data } = await axios.post(
-        "http://localhost:3000/adminhome",
+        "https://foot-trucks-react-js.onrender.com/adminhome",
         {},
         { withCredentials: true }
       );

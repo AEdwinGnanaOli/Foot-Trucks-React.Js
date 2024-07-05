@@ -14,14 +14,14 @@ function VendorProductDetails() {
   const navigate = useNavigate()
   console.log(vendordata)
   useEffect(() => {
-    axios.get('http://localhost:3000/admin/vendorproductdetails').then((result) => {
+    axios.get('https://foot-trucks-react-js.onrender.com/admin/vendorproductdetails').then((result) => {
       setData(result.data.vendorDatas)
     }).catch((err) => {
       console.log(err)
     });
   }, [])
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3000/admin/vendorproductdelete/${id}`).then((user) => {
+    axios.delete(`https://foot-trucks-react-js.onrender.com/admin/vendorproductdelete/${id}`).then((user) => {
       window.location.reload()
     }).catch(err => { console.log(err) })
   }
@@ -31,11 +31,11 @@ function VendorProductDetails() {
   const colums = [
     {
       name: "Image",
-      selector: row => (<img width={150} height={100} src={`http://localhost:3000/images/${row.shopImage}`} alt='chh' className='vendor-p-img' />)
+      selector: row => (<img width={150} height={100} src={`https://foot-trucks-react-js.onrender.com/images/${row.shopImage}`} alt='chh' className='vendor-p-img' />)
     },
     {
       name: "Image",
-      selector: row => (<img width={150} height={100} src={`http://localhost:3000/images/${row.menuImage}`} alt='chh' className='vendor-p-img' />)
+      selector: row => (<img width={150} height={100} src={`https://foot-trucks-react-js.onrender.com/images/${row.menuImage}`} alt='chh' className='vendor-p-img' />)
     },
     {
       name: "Shop Name",

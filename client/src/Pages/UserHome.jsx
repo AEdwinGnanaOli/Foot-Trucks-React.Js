@@ -36,7 +36,7 @@ function Home({ colors }) {
         navigate("/login");
       }
       const { data } = await axios.post(
-        "http://localhost:3000",
+        "https://foot-trucks-react-js.onrender.com",
         {},
         { withCredentials: true }
       );
@@ -53,12 +53,12 @@ function Home({ colors }) {
   }, [cookies, navigate, removeCookie]);
   useEffect(() => {
     // Fetch items from the backend
-    axios.get('http://localhost:3000/items')
+    axios.get('https://foot-trucks-react-js.onrender.com/items')
       .then(response =>{ 
         setItems(response.data.items)
       });
     // Fetch liked items for the user
-    axios.get(`http://localhost:3000/user-likes/${userId}`)
+    axios.get(`https://foot-trucks-react-js.onrender.com/user-likes/${userId}`)
       .then(response => {
         const likedItemIds = response.data.details.map(like => like.vendorId);
         setLikedItems(likedItemIds);
@@ -83,7 +83,7 @@ function Home({ colors }) {
   };
   const handleUserDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/user/delete/${id}`)
+      .delete(`https://foot-trucks-react-js.onrender.com/user/delete/${id}`)
       .then((user) => {
         window.location.reload();
         Logout();
@@ -95,7 +95,7 @@ function Home({ colors }) {
   const handleClicks = (vendorId) => {
     console.log(userId, vendorId);
     axios
-      .post(`http://localhost:3000/like/${userId}/${vendorId}`)
+      .post(`https://foot-trucks-react-js.onrender.com/like/${userId}/${vendorId}`)
       .then((res) => {
         localStorage.setItem("like", res.data.status);
         setLiked(!liked);
@@ -176,7 +176,7 @@ function Home({ colors }) {
             cover={
               <img
                 alt="example"
-                src={`http://localhost:3000/images/${vendor.menuImage}`}
+                src={`https://foot-trucks-react-js.onrender.com/images/${vendor.menuImage}`}
                 style={{ height: "300px" }}
               />
             }
@@ -206,7 +206,7 @@ function Home({ colors }) {
             <Meta
               avatar={
                 <Avatar
-                  src={`http://localhost:3000/images/${vendor.shopImage}`}
+                  src={`https://foot-trucks-react-js.onrender.com/images/${vendor.shopImage}`}
                   style={{
                     width: "100px",
                     height: "100px",

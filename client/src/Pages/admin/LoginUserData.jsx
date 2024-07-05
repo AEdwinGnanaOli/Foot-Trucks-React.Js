@@ -9,13 +9,13 @@ function LoginUserData() {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:3000/login/userdata').then(user => {
+        axios.get('https://foot-trucks-react-js.onrender.com/login/userdata').then(user => {
             setData(user.data.userDatas)
         })
 
     }, [])
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:3000/deletedetails/${id}`).then((user) => {
+        axios.delete(`https://foot-trucks-react-js.onrender.com/deletedetails/${id}`).then((user) => {
             window.location.reload()
         }).catch(err => { console.log(err) })
     }

@@ -8,7 +8,7 @@ function UserCart() {
     const { userId, token } = useParams()
     const [userCart, setCart] = useState([])
     useEffect(() => {
-        axios.get(`http://localhost:3000/usercartdisplay/${userId}/${token}`).then(product => {
+        axios.get(`https://foot-trucks-react-js.onrender.com/usercartdisplay/${userId}/${token}`).then(product => {
             setCart(product.data.userCart)
 
         }).catch(err => {
@@ -16,7 +16,7 @@ function UserCart() {
         })
     }, [])
     const handleDelete = (id, vendorId) => {
-        axios.delete(`http://localhost:3000/usercartdelete/${id}/${vendorId}`).then((user) => {
+        axios.delete(`https://foot-trucks-react-js.onrender.com/usercartdelete/${id}/${vendorId}`).then((user) => {
             window.location.reload()
         }).catch(err => { console.log(err) })
     }
@@ -29,7 +29,7 @@ function UserCart() {
                     userCart.map((vendor) => (
                         <Col className='' key={vendor._id}>
                             <Card style={{ width: '15rem', }} className='col-sm-12' >
-                                <Card.Img variant="top" src={`http://localhost:3000/images/${vendor.image}`} />
+                                <Card.Img variant="top" src={`https://foot-trucks-react-js.onrender.com/images/${vendor.image}`} />
                                 <Card.Body>
                                     <Card.Title>{vendor.shopname}</Card.Title>
                                     <Card.Text>{vendor.shopaddress}</Card.Text>
@@ -49,7 +49,7 @@ function UserCart() {
                             <div className="card-img">
                                 <Card.Img
                                     variant='top'
-                                    src={`http://localhost:3000/images/${vendor.menuImage}`}
+                                    src={`https://foot-trucks-react-js.onrender.com/images/${vendor.menuImage}`}
                                     style={{ width: '300px', height: '300px' }}
                                 />
                             </div>
