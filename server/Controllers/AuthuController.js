@@ -2,7 +2,6 @@ const UserModel = require('../Models/UserMoldel')
 const Vendormodel = require('../Models/VendorModel')
 const ProductModel = require('../Models/ProductModel')
 const { createSceretToken } = require('../Util/SecretToken');
-const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const multer = require('multer')
