@@ -46,6 +46,7 @@ function ProductSignIn() {
       axios
         .post(`https://foot-trucks-react-js.onrender.com/productregister/${vendorId}`, formData)
         .then((user) => {
+          console.log(user)
           if (user.data === "User already exists") {
             throw new Error();
           } else {

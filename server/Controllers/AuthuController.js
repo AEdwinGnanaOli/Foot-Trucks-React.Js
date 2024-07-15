@@ -47,9 +47,10 @@ module.exports.VendorSignUp = async (req, res, next) => {
 module.exports.ProductRegister = async (req, res, next) => {
     try {
         const { vendorId } = req.params
-
+        console.log(vendorId)
         const { shopname, email, shopmobilenumber, shopaddress, starttime, endtime, role } = req.body
         const product = await ProductModel.create({ ProductId: vendorId, shopname, email, shopmobilenumber, shopaddress, starttime, endtime, shopImage: req.files.file1[0].filename,menuImage:req.files.file2[0].filename, role })
+        console.log(product)
         res.json({ message: 'Product Signup Successfully', Status: 'Success', product })
         next()
     } catch (err) {
