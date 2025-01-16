@@ -11,6 +11,7 @@ const AuthProvider = (children) => {
         return {
           user: parseData?.user || null,
           token: parseData?.token || ""
+          
         };
       } catch (error) {
         console.log(error);
