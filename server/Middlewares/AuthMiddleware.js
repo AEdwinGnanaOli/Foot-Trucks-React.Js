@@ -1,60 +1,34 @@
-const UserModel=require('../Models/UserMoldel')
-const ProductModel=require('../Models/ProductModel')
-const LoginModel = require('../Models/LoginModel');
-const likes=require('../Models/like')
-const jwt =require('jsonwebtoken');
-const Vendormodel = require('../Models/VendorModel');
+import jwt from "jsonwebtoken";
+import { verifyToken } from "../utils/secretToken.js";
 
+const authenticate = (req, res, next) => {
+  const { token } = req.cookies; // Extract the token from cookies
 
-module.exports.userVerification=(req,res)=>{
-    const token=req.cookies.token
-    if(!token){
-        return res.json({ status: false })
-    }
-    jwt.verify(token,'jwt_secret_key',async(err,data)=>{
-        if (err) {
-            return res.json({ status: false })
-           } else {
-             const user = await UserModel.findById(data.id)
-             const vendorProducts= await ProductModel.find({})
-             const likeDetails=await likes.find({userId:data.id})
-             if (user) {return res.json({ status: true,user,vendorProducts,likeDetails})}
-             else {return res.json({ status: false })}
-           }
-         })
-}
-
-module.exports.vendorVerification=(req,res)=>{
-  const token=req.cookies.token
-  if(!token){
-      res.json({ status: false })
+  // Check if the token exists
+  if (!token) {
+    return res.status(401).json({ status: false, message: "Authentication token is missing" });
   }
-  jwt.verify(token,'jwt_secret_key',async(err,data)=>{
-      if (err) {
-          return res.json({ status: false })
-         } else {
-           const vendor = await UserModel.findById(data.id)
-           const  vendorProduct=await ProductModel.find({email:vendor.email})
-           if (vendor) {
-            return res.json({ status: true,vendor,vendorProduct})}
-           else {return res.json({ status: false })}
-         }
-       })
 
-}
-module.exports.adminVerification=(req,res)=>{
-  const token=req.cookies.token
-  if(!token){
-      return res.json({ status: false })
+  // Verify the token
+  const decode = verifyToken(token);
+
+  // Attach user information to the request object
+  req.user = { id: decode.id, role: decode.role };
+
+  // Proceed to the next middleware or route handler
+  next();
+
+};
+
+const roleAuthentication = (roles = []) => async (req, res, next) => {
+
+  const { user } = req;
+  // console.log(user)
+  if (roles.includes(user.role)) {
+
+    next();
+  } else {
+    return res.status(403).json({ message: 'Unauthorized' });
   }
-  jwt.verify(token,'jwt_secret_key',async(err,data)=>{
-      if (err) {
-          return res.json({ status: false })
-         } else {
-           const user = await UserModel.findById(data.id)
-           if (user) {return res.json({ status: true,user})}
-           else {return res.json({ status: false })}
-         }
-       })
-}
-
+};
+export { authenticate, roleAuthentication };

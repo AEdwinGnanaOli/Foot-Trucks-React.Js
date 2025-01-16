@@ -1,7 +1,7 @@
 const item = require("../Models/like");
 const Product = require("../Models/ProductModel");
 
-module.exports.Likes = async (req, res, next) => {
+module.exports.Likes = async (req, res) => {
   try {
     const { userId, vendorId } = req.params;
     console.log(userId, vendorId);
@@ -22,11 +22,10 @@ module.exports.Likes = async (req, res, next) => {
     console.log(err);
   }
 };
-module.exports.LikeProduct=async(req,res,next)=>{
+module.exports.LikeProduct=async(req,res)=>{
     const{userId}=req.params
     console.log(userId)
     const details=await item.find({userId:userId})
     res.json({message:'Find Successfully',details})
     console.log(details)
-    next()
 }

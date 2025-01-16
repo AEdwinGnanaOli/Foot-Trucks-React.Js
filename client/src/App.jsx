@@ -1,85 +1,67 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import './App.css'
-import SignUp from "./Pages/SignUp";
-import Login from "./Pages/Login";
-import Index from './Pages/Index';
-import UserHome from "./Pages/UserHome";
-import ForgotPassword from "./Pages/ForgotPassword";
-import ResetPassword from "./Pages/ResetPassword";
-import VendorProductFullDedails from "./Pages/VendorProductFullDedails";
-import UserDetails from "./Pages/admin/UserDetails";
-import VendorProductDetails from "./Pages/admin/VendorProductDetails";
-import VendorDetails from "./Pages/admin/VendorDetails";
-import AdminHome from "./Pages/admin/AdminHome";
-import AdminProductUpdate from "./Pages/admin/AdminProductUpdate";
-import AdminVendorUpdate from "./Pages/admin/AdminVendorUpdate";
-import AdminUserUpdate from "./Pages/admin/AdminUserUpdate";
-import UserUpdate from "./Pages/UserUpdate";
-import LoginUserData from "./Pages/admin/LoginUserData";
-import LoginVendorData from "./Pages/admin/LoginVendorData";
-import UserSignIn from "./Pages/admin/UserSignIn";
-import VendorProductSignIn from "./Pages/admin/VendorProductSignIn";
-import VendorSignInProduct from "./Pages/admin/VendorSignInProduct";
-import UserCart from "./Pages/UserCart";
-import Pagenotfound from "./Pages/Pagenotfound";
-import Dashboard from "./Pages/admin/Dashboard";
-import AdminIndex from './Pages/admin/Index' 
-import AboutUs from "./Pages/AboutUs";
-import ContectUs from "./Pages/ContectUs";
-import Footer from './Components/Footer'
+import React, { Suspense, lazy } from "react";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route
+} from "react-router-dom";
 
+import "./css/style.css";
+import "./charts/ChartjsConfig";
+import Routes from "./router/Routes";
+import 'antd/dist/reset.css'; // Import Ant Design styles
+import { Toaster } from "react-hot-toast";
+
+// Lazy load pages
+//admin routes
+// const Dashboard = lazy(() => import("./pages/admin/Index"));
+// const Home = lazy(() => import("./pages/Home"));
+// const Message = lazy(() => import("./pages/Message"));
+
+//auth routes
+// const SignIn = lazy(() => import("./pages/auth/sign-in/SignIn"));
+// const SignUp = lazy(() => import("./pages/auth/sign-up/SignUp"));
+// const NotFound = lazy(() => import("./pages/NotFound"));
+// other routes
+// const Index = lazy(() => import("./pages/Index"));
+// Layouts
+// import { RootLayout } from "./components/layout/RootLayout";
+// import AuthLayout from "./components/layout/AuthLayout";
+// import UserHome from "./pages/UserHome";
+// import { Userdata } from "./services/apiServices";
+// import AdminRootLayout from "./components/layout/AdminRootLayout";
+// import Index from "./pages/Index";
 
 function App() {
-  const hexCharacters = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"]
-  const getCharacter = (index) => {
-    return hexCharacters[index]
-  }
-  const randomColor = () => {
-    let hexColorRep = '#'
-    for (let i = 0; i < 6; i++) {
-      const randomCharacters = Math.floor(Math.random() * hexCharacters.length)
-      hexColorRep += getCharacter(randomCharacters)
-    }
-    return hexColorRep
-  }
+  // Define routes using createBrowserRouter
+  const router = createBrowserRouter(Routes());
+  // createRoutesFromElements(
+  //   <>
+  //     {/* Main Application Routes */}
+  //     <Route path="/" element={<RootLayout />}>
+  //       <Route index element={<Index />} />
+  //       <Route path="admin" element={<AdminRootLayout />}>
+  //         <Route index element={<Dashboard />} />
+  //         {/* <Route path="messages" element={<Message />} /> */}
+  //         {/* <Route path="e-commerce/customers" element={<Home />} /> */}
+  //       </Route>
+
+  //       {/* <Route path="user" loader={Userdata} element={<UserHome />} /> */}
+
+  //       <Route path="sign-in" element={<SignIn />} />
+  //       <Route path="sign-up" element={<SignUp />} />
+  //     </Route>
+
+  //     <Route path="*" element={<NotFound />} />
+  //   </>
+  // )
   return (
-    <>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/signin" element={<SignUp />} />
-          <Route path="/userhome" element={<UserHome colors={randomColor()} />} />
-          <Route path="/productfulldetail/:id/:token" element={<VendorProductFullDedails />} />
-          <Route path='/login' element={<Login />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/contect-us" element={<ContectUs />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/resetpassword/:id/:token" element={<ResetPassword />} />
-          <Route path="/adminhome" element={<AdminHome colors={randomColor()} />} />
-          <Route path="/admin/dashboard" element={<Dashboard  colors={randomColor()} />} />
-          <Route path="/admin/layout" element={<AdminIndex colors={randomColor()} />} />
-          <Route path="/userdetails" element={<UserDetails />} />
-          <Route path="/vendorproduct" element={<VendorProductDetails />} />
-          <Route path="/vendordetails" element={<VendorDetails />} />
-          <Route path="/adminproductupdate" element={<AdminProductUpdate />} />
-          <Route path="/user/update" element={<UserUpdate />} />
-          {/* <Route path="/vendor/update" element={<VendorUpdate />} /> */}
-          <Route path="/admin/vendor/update" element={<AdminVendorUpdate />} />
-          <Route path="/admin/user/update" element={<AdminUserUpdate />} />
-          <Route path="/userlogindata" element={<LoginUserData />} />
-          <Route path="/vendorlogindata" element={<LoginVendorData />} />
-          <Route path="*" element={<Pagenotfound />} />
-          <Route path="/usercart/:userId/:token" element={<UserCart/>}/>
-          <Route path="/usersign" element={<UserSignIn />} />
-          <Route path="/vendorproductsign/:vendorId" element={<VendorProductSignIn />} />
-          <Route path="/vendorsignproduct" element={<VendorSignInProduct />} />
-          {/* <Route path="/admin/about" element={<About />} /> */}
-          {/* <Route path="/admin/contect" element={<ContectUs />} /> */}
-          <Route path="footer" element={<Footer />} />
-        </Routes>
-        
-    </>
-  )
+    <Suspense fallback={<div>Loading...</div>}>
+      <RouterProvider router={router} />
+
+      <Toaster position="top-right"/>
+    </Suspense>
+  );
 }
 
-export default App
+export default App;

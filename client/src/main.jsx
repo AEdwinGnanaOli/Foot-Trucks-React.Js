@@ -1,15 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "react-toastify/dist/ReactToastify.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { AuthProvider } from "./Context/auth.jsx";
-import { BrowserRouter } from "react-router-dom";
+
+import App from "./App";
+// import 'primereact/resources/themes/saga-blue/theme.css'; // Choose your theme
+// import 'primereact/resources/primereact.min.css';         // Core CSS
+// import 'primeicons/primeicons.css';                      // Icons
+// import 'primeflex/primeflex.css';                        // Utility classes
+
+
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
+import "./App.css";
+import "./index.css";
+
+import AppProviders from "./providers/AppProvider";
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <AuthProvider>
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
-    
-  </AuthProvider>
+  <React.StrictMode>
+    <AppProviders>
+      <App />
+    </AppProviders>
+  </React.StrictMode>
 );

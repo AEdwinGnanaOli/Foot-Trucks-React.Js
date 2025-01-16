@@ -8,7 +8,7 @@
   justify-content: center;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 31rem;
+  /* height: 31rem; */
   background-color: #fff;
   }
   
@@ -52,12 +52,15 @@
   }
   .about-content{
 	max-width: 1000px;
-    max-height: 20rem;
+  text-align: justify;
+    /* height: 38rem; */
+    /* height: 100%; */
+    object-fit: cover;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
   }
   
   .about-content p {
