@@ -1,5 +1,5 @@
 const item = require("../Models/like");
-const Product = require("../Models/ProductModel");
+const Product = require("../models/productModel");
 
 module.exports.Likes = async (req, res) => {
   try {
